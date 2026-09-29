@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Payroll Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .bento-inner-shadow {
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c3c5d9",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#d3e4fe",
+                        "secondary-container": "#dae2fd",
+                        "surface-dim": "#d8dadc",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-container": "#57677e",
+                        "tertiary": "#3f4f65",
+                        "surface": "#f7f9fb",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#5c647a",
+                        "on-primary-container": "#dfe3ff",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-tint": "#004ced",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#737688",
+                        "on-background": "#191c1e",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#dae2fd",
+                        "inverse-primary": "#b7c4ff",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#2d3133",
+                        "primary-container": "#0052ff",
+                        "primary-fixed": "#dde1ff",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "surface-container-low": "#f2f4f6",
+                        "primary": "#003ec7",
+                        "on-tertiary-container": "#d6e6ff",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "secondary": "#565e74",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001452",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-surface": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#434656",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "surface-variant": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "margin-mobile": "16px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "numeric-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "numeric-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center px-margin-mobile h-14">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate executive in a modern, bright office environment. The lighting is soft and natural, emphasizing a high-end corporate aesthetic with a clean, minimalist background in neutral tones. The style is crisp and confident, matching a premium financial service app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc98CRv3W35HLh5_4ESfuUfnj-qJZaifgmMZNkbxOBe1yJHBWKUATfa52Ck7Pviqg3km8mZdGDRgvIyHOQRRat7rGljPRi0Qmnu0LSI11zPIX25Upz97r4IgIugeknG1TBq-FOaMgBrnuEmt4Zwxgo-ld9b_OMRtDEUmcHCpkV-rYg9ubnLk0Vchsu7BwAoQTe_UT7uhmeKvgz_oqOlOUbHpCalPCAAvTsFd6iFCbd7qa2qCI4FeQZ6fzpL0oZdLD9pqchwYpRsMlB"/>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Kinetic Payroll</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="pt-20 px-margin-mobile space-y-lg">
+<!-- Hero Section: Total Payroll Summary -->
+<section class="relative overflow-hidden rounded-xl bg-primary p-lg text-on-primary shadow-lg">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+<div class="relative z-10 space-y-sm">
+<span class="text-label-sm font-label-sm opacity-80 uppercase tracking-widest">Total Monthly Payroll</span>
+<div class="flex items-baseline gap-2">
+<span class="text-display-lg-mobile font-display-lg-mobile">$142,850.00</span>
+<span class="text-label-sm font-label-sm bg-primary-container/20 px-2 py-0.5 rounded-full">+4.2%</span>
+</div>
+<div class="flex justify-between items-end pt-md border-t border-white/10">
+<div>
+<p class="text-label-sm font-label-sm opacity-80">Next Payment Date</p>
+<p class="text-body-lg font-body-lg font-bold">October 28, 2023</p>
+</div>
+<div class="text-right">
+<p class="text-label-sm font-label-sm opacity-80">Active Employees</p>
+<p class="text-body-lg font-body-lg font-bold">124</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions: Bento-ish Layout -->
+<section class="grid grid-cols-2 gap-gutter">
+<button class="flex flex-col items-start p-md bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm hover:bg-surface-container-low transition-colors active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-primary flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined">calculate</span>
+</div>
+<span class="text-body-md font-body-md font-bold text-on-surface">New Calculation</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Run payroll cycle</span>
+</button>
+<button class="flex flex-col items-start p-md bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm hover:bg-surface-container-low transition-colors active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<span class="text-body-md font-body-md font-bold text-on-surface">Generate Payslips</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Export PDF batch</span>
+</button>
+</section>
+<!-- Dynamic Visualization (Mock Chart) -->
+<section class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="text-headline-md font-headline-md text-on-surface">Payroll Trends</h3>
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+<div class="h-32 flex items-end justify-between gap-2 px-2">
+<div class="w-full bg-primary-container/20 rounded-t-sm h-1/2 relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-label-sm font-label-sm opacity-0 group-hover:opacity-100 transition-opacity">$120k</div>
+</div>
+<div class="w-full bg-primary-container/20 rounded-t-sm h-2/3 relative group"></div>
+<div class="w-full bg-primary-container/20 rounded-t-sm h-1/2 relative group"></div>
+<div class="w-full bg-primary-container/40 rounded-t-sm h-3/4 relative group"></div>
+<div class="w-full bg-primary rounded-t-sm h-[90%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-label-sm font-label-sm font-bold text-primary">$142k</div>
+</div>
+</div>
+<div class="flex justify-between mt-sm text-label-sm font-label-sm text-on-surface-variant px-1">
+<span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span>
+</div>
+</section>
+<!-- Recent Activity List -->
+<section class="space-y-md">
+<div class="flex justify-between items-center px-1">
+<h3 class="text-headline-md font-headline-md text-on-surface">Recent Activity</h3>
+<button class="text-primary text-label-sm font-label-sm font-bold">View All</button>
+</div>
+<div class="space-y-sm">
+<!-- Activity Item 1 -->
+<div class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl border border-outline-variant/10 transition-colors hover:bg-surface-container-low cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-body-md font-bold text-on-surface truncate">Sept 2023 Full Cycle</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Completed • 124 employees</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-body-md font-body-md font-bold text-on-surface">$138,420</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Oct 02</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl border border-outline-variant/10 transition-colors hover:bg-surface-container-low cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary">pending</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-body-md font-bold text-on-surface">Off-cycle Bonus Run</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Processing • 12 employees</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-body-md font-body-md font-bold text-on-surface">$24,000</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">In Progress</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl border border-outline-variant/10 transition-colors hover:bg-surface-container-low cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error">assignment_late</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-body-md font-bold text-on-surface">Tax Filing Q3</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Action Required • IRS Form 941</p>
+</div>
+<div class="text-right shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-container-lowest rounded-t-xl shadow-lg">
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim active:scale-90 transition-all duration-200 hover:bg-surface-container-high p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-sm font-label-sm">Payroll</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim active:scale-90 transition-all duration-200 hover:bg-surface-container-high p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-label-sm font-label-sm">Tax</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim active:scale-90 transition-all duration-200 hover:bg-surface-container-high p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-sm font-label-sm">Payslips</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Contextual to Home/Dashboard -->
+<button class="fixed right-margin-mobile bottom-24 w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-size: 32px;">add</span>
+</button>
+<script>
+        // Micro-interaction for list items
+        document.querySelectorAll('.cursor-pointer').forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.backgroundColor = 'var(--tw-surface-container-high)';
+                setTimeout(() => {
+                    item.style.backgroundColor = '';
+                }, 200);
+            });
+        });
+
+        // Simple mock for "New Calculation" click
+        document.querySelectorAll('button').forEach(btn => {
+            if(btn.textContent.includes('New Calculation')) {
+                btn.addEventListener('click', () => {
+                    alert('Initializing new payroll calculation cycle...');
+                });
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Management System</title>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="cyber-particles"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-wrapper">
+        <div class="glass-card login-card">
+            <h1 style="font-family: var(--font-display); color: var(--accent-primary); margin-bottom: 0.5rem;">PMS Admin</h1>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Sign in to continue</p>
+            <form onsubmit="handleLogin(event)">
+                <div style="margin-bottom: 1rem; text-align: left;">
+                    <label style="color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Username</label>
+                    <input type="text" id="loginUsername" required style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                </div>
+                <div style="margin-bottom: 2rem; text-align: left;">
+                    <label style="color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Password</label>
+                    <input type="password" id="loginPassword" required style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container" id="app-container" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="material-symbols-outlined logo-icon">monetization_on</span>
+                PMS
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" onclick="switchTab('dashboard', this)">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('employees', this)">
+                    <span class="material-symbols-outlined">group</span>
+                    Employees
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('payslips', this)">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    Payslips
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('taxes', this)">
+                    <span class="material-symbols-outlined">account_balance</span>
+                    Taxes
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1 class="header-title">Dashboard Overview</h1>
+            </header>
+
+            <!-- View Containers -->
+            <div id="view-dashboard" class="view-section active-view">
+                <!-- Dynamic Stats injected by app.js -->
+                <section id="stats-grid" class="stats-grid">
+                    <!-- Loading state -->
+                    <div class="glass-card"><div class="stat-label">Loading...</div></div>
+                </section>
+            </div>
+
+            <!-- Employees View -->
+            <div id="view-employees" class="view-section" style="display: none;">
+                <section class="glass-card" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h2 style="font-family: var(--font-display); color: var(--accent-primary);">Employee Directory</h2>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <div style="position: relative;">
+                                <span class="material-symbols-outlined" style="position: absolute; left: 10px; top: 10px; color: var(--text-muted); font-size: 1.2rem;">search</span>
+                                <input type="text" id="employeeSearchInput" placeholder="Search (Press Enter)" style="padding: 0.5rem 1rem 0.5rem 2.2rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; outline: none;" onkeyup="handleEmployeeSearch(event)">
+                            </div>
+                            <button class="btn btn-primary" onclick="openAddEmployeeModal()">
+                                <span class="material-symbols-outlined">person_add</span> Add New Employee
+                            </button>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div id="pagination-info" style="color: var(--text-muted);">Loading employees...</div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn" onclick="prevPage()" id="btn-prev-page" style="display: none;" disabled>Previous</button>
+                            <button class="btn" onclick="nextPage()" id="btn-next-page" disabled>Next</button>
+                        </div>
+                    </div>
+                    <div style="overflow-y: auto; flex: 1;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-muted);">
+                                    <th style="padding: 1rem;">ID</th>
+                                    <th style="padding: 1rem;">Name</th>
+                                    <th style="padding: 1rem;">Surname</th>
+                                    <th style="padding: 1rem;">Age</th>
+                                    <th style="padding: 1rem;">Department</th>
+                                    <th style="padding: 1rem;">Designation</th>
+                                    <th style="padding: 1rem;">Base Salary</th>
+                                    <th style="padding: 1rem;">Date Joined</th>
+                                    <th style="padding: 1rem; text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employees-table-body">
+                                <tr><td colspan="9" style="padding: 1rem; text-align: center;">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Payslips View -->
+            <div id="view-payslips" class="view-section" style="display: none;">
+                <section class="glass-card" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+                    <h2 style="font-family: var(--font-display); color: var(--accent-primary); margin-bottom: 1rem;">Payslips</h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div id="payslips-pagination-info" style="color: var(--text-muted);">Loading payslips...</div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn" onclick="prevPayslipsPage()" id="btn-prev-payslips" style="display: none;" disabled>Previous</button>
+                            <button class="btn" onclick="nextPayslipsPage()" id="btn-next-payslips" disabled>Next</button>
+                        </div>
+                    </div>
+                    <div style="overflow-y: auto; flex: 1;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-muted);">
+                                    <th style="padding: 1rem;">Payslip ID</th>
+                                    <th style="padding: 1rem;">Employee</th>
+                                    <th style="padding: 1rem;">Salary ID</th>
+                                    <th style="padding: 1rem;">Date Generated</th>
+                                    <th style="padding: 1rem;">Status</th>
+                                    <th style="padding: 1rem; text-align: right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payslips-table-body">
+                                <tr><td colspan="4" style="padding: 1rem; text-align: center;">No payslips generated for this period.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Taxes View -->
+            <div id="view-taxes" class="view-section" style="display: none;">
+                <section class="glass-card" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+                    <h2 style="font-family: var(--font-display); color: var(--accent-primary); margin-bottom: 1rem;">Tax Deductions</h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div id="taxes-pagination-info" style="color: var(--text-muted);">Loading taxes...</div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn" onclick="prevTaxesPage()" id="btn-prev-taxes" style="display: none;" disabled>Previous</button>
+                            <button class="btn" onclick="nextTaxesPage()" id="btn-next-taxes" disabled>Next</button>
+                        </div>
+                    </div>
+                    <div style="overflow-y: auto; flex: 1;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-muted);">
+                                    <th style="padding: 1rem;">Salary ID</th>
+                                    <th style="padding: 1rem;">Employee</th>
+                                    <th style="padding: 1rem;">Gross Salary</th>
+                                    <th style="padding: 1rem;">Tax Deduction</th>
+                                    <th style="padding: 1rem;">Net Salary</th>
+                                </tr>
+                            </thead>
+                            <tbody id="taxes-table-body">
+                                <tr><td colspan="5" style="padding: 1rem; text-align: center;">Tax records will appear here after payroll processing.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <!-- Settings View -->
+            <div id="view-settings" class="view-section" style="display: none;">
+                <section class="glass-card" style="flex: 1;">
+                    <h2 style="font-family: var(--font-display); color: var(--accent-primary); margin-bottom: 1.5rem;">System Settings</h2>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Theme Preferences</h3>
+                        <p style="color: var(--text-muted);">Choose your preferred color scheme for the application.</p>
+                        <div class="theme-selector">
+                            <div class="theme-btn default" onclick="setTheme('default')" title="Default Dark Neon"></div>
+                            <div class="theme-btn light" onclick="setTheme('light')" title="Light Mode"></div>
+                            <div class="theme-btn emerald" onclick="setTheme('emerald')" title="Emerald Green"></div>
+                            <div class="theme-btn royal" onclick="setTheme('royal')" title="Royal Purple"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Audit Logs View -->
+            <div id="view-audit" class="view-section" style="display: none;">
+                <section class="glass-card" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+                    <h2 style="font-family: var(--font-display); color: var(--accent-primary); margin-bottom: 1.5rem;">Audit Logs</h2>
+                    <div style="overflow-y: auto; flex: 1;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-muted);">
+                                    <th style="padding: 1rem;">Timestamp</th>
+                                    <th style="padding: 1rem;">User</th>
+                                    <th style="padding: 1rem;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="audit-table-body">
+                                <tr>
+                                    <td style="padding: 1rem;">Just now</td>
+                                    <td style="padding: 1rem;">admin</td>
+                                    <td style="padding: 1rem;">System logged access to Audit Logs</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <!-- Users Management View -->
+            <div id="view-users" class="view-section" style="display: none;">
+                <section class="glass-card" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2 style="font-family: var(--font-display); color: var(--accent-primary);">Manage Users</h2>
+                        <button class="btn btn-primary" onclick="openAddUserModal()">
+                            <span class="material-symbols-outlined">person_add</span> Add New User
+                        </button>
+                    </div>
+                    <div style="overflow-y: auto; flex: 1;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-muted);">
+                                    <th style="padding: 1rem;">ID</th>
+                                    <th style="padding: 1rem;">Username</th>
+                                    <th style="padding: 1rem;">Role</th>
+                                    <th style="padding: 1rem; text-align: right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <tr><td colspan="4" style="padding: 1rem; text-align: center;">Loading users...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Employee Modal -->
+    <div id="addEmployeeModal" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+        <div class="glass-card" style="width: 100%; max-width: 500px; padding: 2rem;">
+            <h2 style="margin-bottom: 1.5rem; color: var(--accent-primary);">Add New Employee</h2>
+            <form id="addEmployeeForm" onsubmit="submitEmployeeForm(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Name</label>
+                        <input type="text" id="empName" required pattern="^[a-zA-Z\s]+$" title="Only letters and spaces are allowed" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Surname</label>
+                        <input type="text" id="empSurname" required pattern="^[a-zA-Z\s]+$" title="Only letters and spaces are allowed" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Age</label>
+                        <input type="number" id="empAge" required min="18" style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Base Salary (₹)</label>
+                        <input type="number" id="empSalary" required min="0" style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Department</label>
+                    <input type="text" id="empDept" required pattern="^[a-zA-Z\s]+$" title="Only letters and spaces are allowed" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Designation</label>
+                    <input type="text" id="empDesig" required pattern="^[a-zA-Z\s]+$" title="Only letters and spaces are allowed" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button type="button" class="btn" onclick="closeAddEmployeeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Employee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Generate Individual Payslip Modal -->
+    <div id="generatePayslipModal" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+        <div class="glass-card" style="width: 100%; max-width: 500px; padding: 2rem;">
+            <h2 style="margin-bottom: 1rem; color: var(--accent-primary);">Edit & Generate Payslip</h2>
+            <p id="generatePayslipEmpName" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 1.5rem; color: white;">Employee Name</p>
+            
+            <form id="payslipPreviewForm" onsubmit="confirmGeneratePayslip(event)">
+                <input type="hidden" id="generatePayslipEmpId">
+                <input type="hidden" id="payslipMonth">
+                <input type="hidden" id="payslipYear">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Basic Salary (₹)</label>
+                        <input type="number" id="previewBasic" readonly style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">HRA (₹)</label>
+                        <input type="number" id="previewHra" readonly style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);">
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">DA (₹)</label>
+                        <input type="number" id="previewDa" readonly style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Allowances (₹)</label>
+                        <input type="number" id="previewAllowances" oninput="recalculatePayslipPreview()" required style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--border-glass); margin: 1.5rem 0; padding-top: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Tax Deduction (₹)</label>
+                            <input type="number" id="previewTax" oninput="recalculatePayslipPreview()" required style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-weight: bold;">Net Salary (₹)</label>
+                            <input type="number" id="previewNet" readonly style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(14, 165, 233, 0.1); border: 1px solid var(--accent-primary); color: white; font-weight: bold;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button type="button" class="btn" onclick="closeGeneratePayslipModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save & Generate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+        <div class="glass-card" style="width: 100%; max-width: 400px; padding: 2rem;">
+            <h2 style="margin-bottom: 1.5rem; color: var(--accent-primary);">Add System User</h2>
+            <form id="addUserForm" onsubmit="submitUserForm(event)">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Username</label>
+                    <input type="text" id="newUsername" required style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Password</label>
+                    <input type="password" id="newUserPassword" required style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Role</label>
+                    <select id="newUserRole" style="width: 100%; padding: 0.75rem; border-radius: 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; appearance: none;">
+                        <option value="Administrator" style="background: var(--bg-surface);">Administrator</option>
+                        <option value="Manager" style="background: var(--bg-surface);">Manager</option>
+                        <option value="Viewer" style="background: var(--bg-surface);">Viewer</option>
+                    </select>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button type="button" class="btn" onclick="closeAddUserModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/assets/app.js"></script>
+</body>
+</html>

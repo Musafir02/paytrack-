@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tax Management | Payroll Management System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c3c5d9",
+                        "on-primary-container": "#dfe3ff",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-container": "#0052ff",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary": "#3f4f65",
+                        "surface-tint": "#004ced",
+                        "tertiary-fixed": "#d3e4fe",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-fixed": "#001452",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "primary": "#003ec7",
+                        "on-secondary-fixed": "#131b2e",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#d6e6ff",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface-variant": "#434656",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-surface": "#191c1e",
+                        "inverse-primary": "#b7c4ff",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#dae2fd",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "on-secondary-container": "#5c647a",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "surface": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#dae2fd",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "secondary": "#565e74",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#57677e",
+                        "background": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "on-background": "#191c1e",
+                        "outline": "#737688",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dde1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "margin-desktop": "32px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "numeric-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "numeric-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"/><script src="/assets/theme.js"></script></head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-14 bg-surface shadow-sm transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female financial executive in a minimalist corporate office setting. Soft, high-key lighting creates a warm and approachable aesthetic. The background is a clean, modern workspace with subtle blue accents, matching the Payroll Management System brand identity. High fidelity photography with a shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaTFy7DlQIyjjHgx6V2oNNaXogCEVsfCT2dp1tlEBYzmob0-Az1DXk3N3SwYBE75rL67RTwyK1fITMyllewF6xiHfpVU1RVU76HHowsc_NFFQ1HgWoo9n_98EYZaXJSCT0UhlwvanloPBDH_Jrd651G4qfohhP_0nlAkt6baeSl4qPx60Eliv4Ec47JDnV8WM2GzLSk0D3rdM8EyP0W-slyO4FzRODRoP-t7Np0Z3u_X8eBpPkJ7g35NjYLVW3lUXTGO8zuMYJ-JAV"/>
+</div>
+<h1 class="text-headline-md font-display font-bold text-primary">Payroll Management System</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95">notifications</button>
+</div>
+</header>
+<main class="pt-20 pb-24 px-margin-mobile max-w-7xl mx-auto">
+<!-- Headline Section -->
+<div class="mb-lg">
+<h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface">Tax Management</h2>
+<p class="text-body-md text-on-surface-variant">Review your liabilities and manage upcoming filings.</p>
+</div>
+<!-- Summary Cards (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl">
+<!-- Quarterly Liability -->
+<div class="bg-surface-container-lowest backdrop-blur-xl border-white/10 p-lg rounded-xl shadow-sm border border-outline-variant/30 flex flex-col justify-between h-48 hover:shadow-md transition-shadow">
+<div>
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Q3 Tax Liability</span>
+<h3 class="text-numeric-lg font-numeric-lg mt-sm text-primary">$42,580.00</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">trending_up</span>
+<span class="text-label-sm font-label-sm text-primary">+4.2% from Q2</span>
+</div>
+</div>
+<!-- Annual Est. Liability -->
+<div class="bg-primary text-on-primary p-lg rounded-xl shadow-lg flex flex-col justify-between h-48 relative overflow-hidden group">
+<div class="relative z-10">
+<span class="text-label-sm font-label-sm text-on-primary-container uppercase tracking-wider">Annual Estimated</span>
+<h3 class="text-numeric-lg font-numeric-lg mt-sm">$168,920.00</h3>
+</div>
+<div class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-label-sm font-label-sm">Next payment due: Oct 15</span>
+</div>
+<!-- Abstract Background Ornament -->
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary-container rounded-full opacity-20 group-hover:scale-110 transition-transform duration-500"></div>
+</div>
+<!-- Quick Actions / Links -->
+<div class="md:col-span-1 grid grid-rows-2 gap-gutter">
+<a class="bg-surface-container-highest p-md rounded-xl flex items-center justify-between group hover:bg-primary hover:text-on-primary transition-all duration-300" href="javascript:void(0)">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary group-hover:bg-on-primary/10 group-hover:text-on-primary">
+<span class="material-symbols-outlined">settings</span>
+</div>
+<span class="font-label-sm text-label-sm">Tax Settings</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary">chevron_right</span>
+</a>
+<a class="bg-surface-container-highest p-md rounded-xl flex items-center justify-between group hover:bg-primary hover:text-on-primary transition-all duration-300" href="javascript:void(0)">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary group-hover:bg-on-primary/10 group-hover:text-on-primary">
+<span class="material-symbols-outlined">history</span>
+</div>
+<span class="font-label-sm text-label-sm">Filing History</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Tax Forms Section -->
+<section>
+<div class="flex items-center justify-between mb-md">
+<h3 class="text-headline-md font-display text-on-surface">Compliance Forms</h3>
+<button class="text-primary font-label-sm text-label-sm flex items-center gap-1 hover:underline active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter Forms
+                </button>
+</div>
+<div class="space-y-sm">
+<!-- Form Row 1: Action Required -->
+<div class="bg-surface-container-lowest backdrop-blur-xl border-white/10 border border-outline-variant/20 p-md rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-md hover:border-primary/50 transition-colors shadow-sm">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-error-container/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">priority_high</span>
+</div>
+<div>
+<h4 class="text-body-lg font-bold text-on-surface">IRS Form 941</h4>
+<p class="text-label-sm text-on-surface-variant">Employer's Quarterly Federal Tax Return • Q3 2023</p>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-xl">
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-label-sm font-label-sm flex items-center gap-1">
+<span class="w-2 h-2 bg-error rounded-full animate-pulse"></span> Action Required
+                        </div>
+<button class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-sm text-label-sm active:scale-95 transition-transform">File Now</button>
+</div>
+</div>
+<!-- Form Row 2: Processing -->
+<div class="bg-surface-container-lowest backdrop-blur-xl border-white/10 border border-outline-variant/20 p-md rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-md hover:border-primary/50 transition-colors shadow-sm">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">pending</span>
+</div>
+<div>
+<h4 class="text-body-lg font-bold text-on-surface">State Unemployment Insurance (SUI)</h4>
+<p class="text-label-sm text-on-surface-variant">Quarterly Report • California (EDD)</p>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-xl">
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-sm font-label-sm">
+                            Processing
+                        </div>
+<button class="text-primary hover:bg-surface-container-low px-lg py-2 rounded-lg font-label-sm text-label-sm active:scale-95 transition-transform border border-primary/20">View Draft</button>
+</div>
+</div>
+<!-- Form Row 3: Completed -->
+<div class="bg-surface-container-lowest backdrop-blur-xl border-white/10 border border-outline-variant/20 p-md rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-md hover:border-primary/50 transition-colors shadow-sm">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<h4 class="text-body-lg font-bold text-on-surface">2022 W-2 Summary</h4>
+<p class="text-label-sm text-on-surface-variant">Annual Wage and Tax Statement • All Employees</p>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-xl">
+<div class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-label-sm font-label-sm">
+                            Completed
+                        </div>
+<button class="text-on-surface-variant hover:bg-surface-container-low px-lg py-2 rounded-lg font-label-sm text-label-sm active:scale-95 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span> PDF
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Visualization Section -->
+<section class="mt-xl">
+<div class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/30 relative overflow-hidden h-64 flex flex-col items-center justify-center">
+<div class="absolute inset-0 opacity-10">
+
+</div>
+<div class="relative z-10 text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-md">analytics</span>
+<h3 class="text-headline-md font-display text-on-surface">Tax Distribution Forecast</h3>
+<p class="text-body-md text-on-surface-variant mt-xs">Visualizing your future fiscal commitments based on current payroll growth.</p>
+<button class="mt-lg border border-primary text-primary px-xl py-2 rounded-full font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-all">Generate Full Report</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface rounded-t-xl shadow-lg border-none transition-colors">
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-high transition-all p-1 rounded-lg" href="javascript:void(0)">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-sm font-label-sm mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-high transition-all p-1 rounded-lg" href="javascript:void(0)">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-sm font-label-sm mt-1">Payroll</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="javascript:void(0)">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-label-sm font-label-sm mt-1">Tax</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-high transition-all p-1 rounded-lg" href="javascript:void(0)">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-sm font-label-sm mt-1">Payslips</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for hovering cards
+        const cards = document.querySelectorAll('.bg-surface-container-lowest backdrop-blur-xl border-white/10');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'transform 0.2s ease-out';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

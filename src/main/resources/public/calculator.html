@@ -1,0 +1,420 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payroll Management System - Salary Module</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c3c5d9",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#d3e4fe",
+                    "secondary-container": "#dae2fd",
+                    "surface-dim": "#d8dadc",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-bright": "#f7f9fb",
+                    "tertiary-container": "#57677e",
+                    "tertiary": "#3f4f65",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "on-secondary-container": "#5c647a",
+                    "on-primary-container": "#dfe3ff",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-tint": "#004ced",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#737688",
+                    "on-background": "#191c1e",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#dae2fd",
+                    "inverse-primary": "#b7c4ff",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#2d3133",
+                    "primary-container": "#0052ff",
+                    "primary-fixed": "#dde1ff",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "surface-container-low": "#f2f4f6",
+                    "primary": "#003ec7",
+                    "on-tertiary-container": "#d6e6ff",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-primary-fixed-variant": "#0038b6",
+                    "secondary": "#565e74",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#001452",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-surface": "#191c1e",
+                    "surface-container": "#eceef0",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#434656",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "margin-mobile": "16px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "margin-desktop": "32px",
+                    "md": "16px",
+                    "gutter": "16px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "numeric-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "numeric-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-layer-1 {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 20px rgba(15, 23, 42, 0.05);
+            border: 1px solid #E2E8F0;
+        }
+        .tonal-layer-2 {
+            background-color: #ffffff;
+            box-shadow: 0px 10px 32px rgba(15, 23, 42, 0.10);
+        }
+        .animate-subtle-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"/><script src="/assets/theme.js"></script></head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center px-margin-mobile h-14 w-full">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+<h1 class="text-headline-md font-display font-bold text-primary dark:text-primary-fixed">Payroll Management System</h1>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex gap-lg">
+<a class="text-primary font-bold hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="javascript:void(0)">Dashboard</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="javascript:void(0)">Payroll</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="javascript:void(0)">Tax</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1 rounded" href="javascript:void(0)">Payslips</a>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim active:scale-95 transition-transform">notifications</button>
+<div class="w-8 h-8 rounded-full bg-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate manager in a bright, modern office setting with soft daylight and a clean minimalist background. The lighting is high-key and professional, reflecting the modern corporate aesthetic of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgy917RnHCIqq9OTBJfXQo2OrElgccgeWOW4m4qqYRHoJ83SX8ljXWwWTZ6Dam-iqnywRzbgGJKQGcyEXQKJqiuOkEoOasopoLNSo08QFr6DXhhvLXo1K41tg3cLzSIkhUrJG8XhYWhtUY_cm0X_T8MFGrtO0ev9OhnDUUtY5EARAtT2m8R5ElIY1-UM5QbKwSj2mODibPnSzbSB051b6XaRmcQZL_NcuqENsaOBv7pp5NPpqc2GpolSYJivTPlRb90cF-PX1tstxB"/>
+</div>
+</div>
+</header>
+<main class="mt-20 mb-24 px-margin-mobile max-w-7xl mx-auto lg:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Sidebar: Employee Selection -->
+<aside class="lg:col-span-4 space-y-lg">
+<div class="tonal-layer-1 p-lg rounded-xl">
+<div class="flex justify-between items-center mb-md">
+<h2 class="text-headline-md font-display">Employees</h2>
+<span class="text-label-sm font-label-sm text-primary">24 TOTAL</span>
+</div>
+<div class="relative mb-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body-md" placeholder="Search staff..." type="text"/>
+</div>
+<div class="space-y-sm max-h-[400px] overflow-y-auto scroll-hide">
+<!-- Active Employee -->
+<div class="flex items-center gap-md p-md bg-secondary-container rounded-lg border-l-4 border-primary cursor-pointer active:scale-[0.98] transition-all">
+<div class="w-10 h-10 rounded-full bg-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="An employee portrait showing a friendly, confident professional woman in her 30s. The image uses a soft, neutral studio background that matches the high-end, clean corporate palette of white and light slate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTmylYVCVgokueUVmDQ5FH01KYoV7it2y_-1Q_qA__rIiKjxKk9zII_mjyuiQw6oIjhS1gY4g_kufI2U19oiPAM1MvLt-Mmp8kntbJ9UPlSO6Xyp32QjMCZ2NbLyDwVWgiXoS0jcuSfGPdfbSRtOkOy4hSbokyV76neKlk6Nmgq2bqwDkMxyTYa9emTjxHGtiNdO3x0imoFJ3K5z0AuBnP1pImNkkGeZPGvmgtOifE5DzH5YaMndXeguVODuhwHUsPUTF1NH0vVKC7"/>
+</div>
+<div class="flex-1">
+<p class="text-body-md font-bold text-on-secondary-fixed">Sarah Jenkins</p>
+<p class="text-label-sm font-label-sm text-on-secondary-container">Senior Product Designer</p>
+</div>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+<!-- Other Employees -->
+<div class="flex items-center gap-md p-md hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer active:scale-[0.98]">
+<div class="w-10 h-10 rounded-full bg-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A profile photo of a male engineer in a light blue shirt, looking approachable and professional. The scene is bright and optimistic, fitting the modern financial software atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhJ6n5FNg9ZPr93-l3FyEHc2M1QApR0C--4JlB3vily5kudZMNScXCYC6XqBn9x2pFuZcyfYUZAabgpjn26etwNd05MxZiphfSBbZpzpuWGSd1uD2TrDcQvcuzGLJ-yYMCbuOaAPvGQXIf5BkjDLNdMPWW7P4oZYoSE55yHUu9R5wnZjispKaHPLOVPaIjSR5uAre-ScnF3Mp3RObQZ8vrLqjEFSRLkgmUhqA7ctbm7RXX_ThOAs2VsNjap4a1zYtQCQKMDpR1rUxM"/>
+</div>
+<div class="flex-1">
+<p class="text-body-md font-bold">Marcus Holloway</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Lead Developer</p>
+</div>
+</div>
+<div class="flex items-center gap-md p-md hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer active:scale-[0.98]">
+<div class="w-10 h-10 rounded-full bg-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a middle-aged male executive in a sleek, modern workspace. The lighting is diffused and professional, reinforcing the trust and efficiency core values of the platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-tKnVWYddGstRKBXrXq6ElQz28snDPSuypvLifvqvQBP1W11s8GYUFDUcgy6Zrzgbi7A0z7ryF3eDeXlyiw5kHiiHhnNDZbsbv-7FYhbY7p1fA5yL2UTYIRee_O5qbp-zugwF_XC0HjxBjfkcbCh6OWZ2exGf4KhDs-OFZ3B8wDVl4YIuFyIfi8Tsuq_pyz_hsmhhgvVxiPFNIMrZUSDRu7gB0tjfzJS7sdLckURNgRfi_SRLs0b0iRpU7SShGN9urWNQspAcXRKx"/>
+</div>
+<div class="flex-1">
+<p class="text-body-md font-bold">David Chen</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Project Coordinator</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Stats Card -->
+<div class="tonal-layer-1 p-lg rounded-xl bg-gradient-to-br from-primary to-primary-container text-white">
+<p class="text-label-sm font-label-sm opacity-80">Next Payrun Date</p>
+<p class="text-headline-md font-display mb-md">Oct 28, 2023</p>
+<div class="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-white w-2/3"></div>
+</div>
+<p class="text-label-sm font-label-sm mt-xs">68% processed this cycle</p>
+</div>
+</aside>
+<!-- Main Panel: Salary Calculation Form -->
+<section class="lg:col-span-8">
+<div class="tonal-layer-1 rounded-xl overflow-hidden">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-white">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">payments</span>
+<h2 class="text-headline-md font-display">Salary Calculation Module</h2>
+</div>
+<div class="px-3 py-1 rounded-full bg-secondary-container text-primary text-label-sm font-label-sm">
+                            OCTOBER CYCLE
+                        </div>
+</div>
+<div class="p-lg grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Inputs -->
+<div class="space-y-lg">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-xs">BASIC SALARY ($)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline">$</span>
+<input class="w-full pl-8 pr-4 h-11 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body-lg font-numeric-lg" id="basic-salary" type="number" value="6500"/>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-xs">BONUSES ($)</label>
+<input class="w-full px-4 h-11 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body-lg" id="bonuses" type="number" value="1200"/>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-xs">OVERTIME (HRS)</label>
+<input class="w-full px-4 h-11 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body-lg" id="ot-hours" type="number" value="12"/>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-xs">OT RATE ($/HR)</label>
+<input class="w-full px-4 h-11 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body-lg" id="ot-rate" type="number" value="45"/>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-xs">DEDUCTIONS ($)</label>
+<input class="w-full px-4 h-11 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body-lg" id="deductions" type="number" value="420"/>
+</div>
+</div>
+<!-- Preview Card -->
+<div class="tonal-layer-2 rounded-xl p-lg bg-surface-container-lowest backdrop-blur-xl border-white/10 border border-primary/10 flex flex-col justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-sm tracking-widest">REAL-TIME PREVIEW</p>
+<div class="space-y-md">
+<div class="flex justify-between items-end">
+<span class="text-body-md text-on-surface-variant">Gross Salary</span>
+<span class="text-numeric-lg font-numeric-lg text-on-surface" id="gross-display">$8,240.00</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant pb-md">
+<span class="text-body-md text-on-surface-variant">Taxes &amp; Levies (22%)</span>
+<span class="text-body-md font-bold text-error" id="tax-display">-$1,812.80</span>
+</div>
+<div class="pt-md">
+<p class="text-label-sm font-label-sm text-primary mb-xs">ESTIMATED NET PAYOUT</p>
+<p class="text-display-lg font-display-lg text-primary" id="net-display">$6,427.20</p>
+</div>
+</div>
+</div>
+<div class="mt-lg">
+<div class="flex items-center gap-xs p-sm bg-tertiary-fixed rounded-lg text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<p class="text-label-sm font-label-sm">Calculation based on local tax tier B</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-lg bg-surface-container-low border-t border-outline-variant flex flex-col md:flex-row gap-md justify-between items-center">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">update</span>
+<span class="text-body-md">Last updated: Today, 09:42 AM</span>
+</div>
+<div class="flex gap-md w-full md:w-auto">
+<button class="flex-1 md:px-lg h-11 border border-outline-variant rounded-lg font-bold text-body-md hover:bg-white transition-colors active:scale-95">
+                                Preview Slip
+                            </button>
+<button class="flex-1 md:px-xl h-11 bg-primary text-white rounded-lg font-bold text-body-md shadow-md hover:bg-primary-container transition-all active:scale-95 flex items-center justify-center gap-sm" id="save-btn">
+<span>Calculate &amp; Save</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- History/Audit Section -->
+<div class="mt-lg tonal-layer-1 rounded-xl p-lg">
+<h3 class="text-headline-md font-display mb-md">Payment History</h3>
+<div class="overflow-x-auto scroll-hide">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant">
+<th class="py-md text-label-sm font-label-sm text-on-surface-variant">PAY PERIOD</th>
+<th class="py-md text-label-sm font-label-sm text-on-surface-variant">GROSS</th>
+<th class="py-md text-label-sm font-label-sm text-on-surface-variant">NET</th>
+<th class="py-md text-label-sm font-label-sm text-on-surface-variant">STATUS</th>
+<th class="py-md text-label-sm font-label-sm text-on-surface-variant">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr>
+<td class="py-md text-body-md">September 2023</td>
+<td class="py-md text-body-md">$7,950.00</td>
+<td class="py-md text-body-md font-bold text-primary">$6,201.00</td>
+<td class="py-md">
+<span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase">Paid</span>
+</td>
+<td class="py-md">
+<button class="text-primary hover:underline text-body-md">Download</button>
+</td>
+</tr>
+<tr>
+<td class="py-md text-body-md">August 2023</td>
+<td class="py-md text-body-md">$7,950.00</td>
+<td class="py-md text-body-md font-bold text-primary">$6,201.00</td>
+<td class="py-md">
+<span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase">Paid</span>
+</td>
+<td class="py-md">
+<button class="text-primary hover:underline text-body-md">Download</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface dark:bg-surface-container-lowest backdrop-blur-xl border-white/10 shadow-lg rounded-t-xl flex justify-around items-center px-4 py-2 h-16 border-t border-outline-variant/30">
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-4 py-1 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-sm font-label-sm">Payroll</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-label-sm font-label-sm">Tax</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-sm font-label-sm">Payslips</span>
+</div>
+</nav>
+<script>
+        const inputs = ['basic-salary', 'bonuses', 'ot-hours', 'ot-rate', 'deductions'];
+        const displayGross = document.getElementById('gross-display');
+        const displayTax = document.getElementById('tax-display');
+        const displayNet = document.getElementById('net-display');
+        const saveBtn = document.getElementById('save-btn');
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
+        }
+
+        function calculateSalary() {
+            const basic = parseFloat(document.getElementById('basic-salary').value) || 0;
+            const bonuses = parseFloat(document.getElementById('bonuses').value) || 0;
+            const otHours = parseFloat(document.getElementById('ot-hours').value) || 0;
+            const otRate = parseFloat(document.getElementById('ot-rate').value) || 0;
+            const deductions = parseFloat(document.getElementById('deductions').value) || 0;
+
+            const gross = basic + bonuses + (otHours * otRate);
+            const taxRate = 0.22;
+            const tax = (gross - deductions) * taxRate;
+            const net = gross - tax - deductions;
+
+            displayGross.innerText = formatCurrency(gross);
+            displayTax.innerText = '-' + formatCurrency(tax);
+            displayNet.innerText = formatCurrency(net);
+
+            // Subtle animation feedback
+            displayNet.classList.add('animate-subtle-pulse');
+            setTimeout(() => displayNet.classList.remove('animate-subtle-pulse'), 1000);
+        }
+
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateSalary);
+        });
+
+        saveBtn.addEventListener('click', () => {
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span> Processing...`;
+            saveBtn.classList.add('opacity-80', 'pointer-events-none');
+            
+            setTimeout(() => {
+                saveBtn.innerHTML = `<span class="material-symbols-outlined">done</span> Saved`;
+                saveBtn.classList.remove('bg-primary');
+                saveBtn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    saveBtn.innerHTML = originalText;
+                    saveBtn.classList.remove('bg-green-600', 'opacity-80', 'pointer-events-none');
+                    saveBtn.classList.add('bg-primary');
+                }, 2000);
+            }, 1200);
+        });
+
+        // Initial calc
+        calculateSalary();
+    </script>
+</body></html>

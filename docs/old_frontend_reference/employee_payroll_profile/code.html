@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Employee Payroll Profile | Kinetic Payroll</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c3c5d9",
+                    "on-primary-container": "#dfe3ff",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-container": "#0052ff",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary": "#3f4f65",
+                    "surface-tint": "#004ced",
+                    "tertiary-fixed": "#d3e4fe",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary-fixed": "#001452",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "primary": "#003ec7",
+                    "on-secondary-fixed": "#131b2e",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#d6e6ff",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "surface-bright": "#f7f9fb",
+                    "on-surface-variant": "#434656",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#2d3133",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-surface": "#191c1e",
+                    "inverse-primary": "#b7c4ff",
+                    "surface-variant": "#e0e3e5",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#dae2fd",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "on-secondary-container": "#5c647a",
+                    "on-primary-fixed-variant": "#0038b6",
+                    "surface": "#f7f9fb",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#dae2fd",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "secondary": "#565e74",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#57677e",
+                    "background": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "on-background": "#191c1e",
+                    "outline": "#737688",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#dde1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "margin-desktop": "32px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "numeric-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "numeric-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e0e3e5; border-radius: 10px; }
+        .glass-effect {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center px-margin-mobile h-14">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female executive in her late 30s, wearing a modern charcoal blazer. She is smiling confidently against a soft-focus office background with warm, natural lighting. The image maintains a high-end corporate aesthetic with a clean, minimalist color palette of soft greys and whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk0EUfQqUv1DmUcTu4KL5WY6WCSZVGVQsCF-2w5cDcuBKcS4tBEtdadSn_9vpYaYxl6NcckAcW5VRsGp4wl_P_1lMwgA63YI4J7V4d9s5jreI-J0zPdSG82SrqnTwyB6s0-wA7adqXhr9CASFWcy8W4ug9gCpaSJwB3HG5nKoZDmBoNGc61FdSH0UDdc9ra8mnRLBZGxIK2_hlpn9EOtOs1rQLzbHyWXVTds4smSepZwOYb1ijDENmQ_unheFdvR9cPAOfTgiTtaNh"/>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Kinetic Payroll</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 transition-transform" data-icon="notifications">notifications</button>
+</div>
+</header>
+<main class="pt-20 px-margin-mobile max-w-5xl mx-auto space-y-lg">
+<!-- Employee Header Bento Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Profile Card -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl p-lg shadow-[0px_4px_20px_rgba(15,23,42,0.05)] border border-outline-variant/20 flex flex-col md:flex-row items-center md:items-start gap-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16"></div>
+<div class="w-24 h-24 rounded-2xl overflow-hidden ring-4 ring-surface-container shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of Marcus Holloway, a senior software engineer. He is wearing a simple navy blue polo shirt and has a friendly, professional demeanor. The background is a clean, neutral white wall with subtle professional studio lighting that emphasizes clarity and detail. High-end modern photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPMyMgxiiCCFdNEagYSN-fYfukuyRlD95xc10X3Cbl9RMaQaQHv2uDwqcxr7ELqgcpugvTBa664OEkJknpKRf7sjn3Audqng5D4YoFrwRddw7neL-0sDFyE2kMRvwMEQO0sM5es8eqDZAu39I_X-EsvCHlBE5Msxye8vD4gtOk7P4l9evrcAx8j737wyYGPzIj5PG3aYo3MCAdiLRQBY9HACY0nDBOPY_3AWFOGeUbmBFoumMLAq1QndvI7gio75k_1ebqXon4VEn1"/>
+</div>
+<div class="flex-grow text-center md:text-left space-y-1">
+<div class="flex flex-col md:flex-row md:items-center gap-2">
+<h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface">Marcus Holloway</h2>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm bg-primary/10 text-primary self-center md:self-auto">Active</span>
+</div>
+<p class="text-body-lg text-on-surface-variant font-medium">Senior Software Engineer • Engineering Dept.</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-4 pt-base">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="badge">badge</span>
+<span class="text-label-sm">EMP-10245</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span>
+<span class="text-label-sm">San Francisco, CA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="bg-primary-container text-on-primary-container rounded-xl p-lg flex flex-col justify-between shadow-lg relative overflow-hidden group">
+<div class="absolute bottom-0 right-0 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" data-icon="payments">payments</span>
+</div>
+<div class="space-y-1">
+<p class="text-label-sm uppercase tracking-wider opacity-80">Next Pay Date</p>
+<p class="text-display-lg-mobile font-display-lg">Oct 31, 2023</p>
+</div>
+<div class="space-y-sm pt-md">
+<button class="w-full py-3 px-4 bg-surface-container-lowest text-primary font-bold rounded-lg text-body-md shadow-sm active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="edit_square">edit_square</span>
+                        Edit Salary
+                    </button>
+<button class="w-full py-3 px-4 border border-on-primary-container/30 text-on-primary-container font-bold rounded-lg text-body-md hover:bg-on-primary-container/10 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                        Update Tax Info
+                    </button>
+</div>
+</div>
+</section>
+<!-- Tabs Navigation -->
+<nav class="flex border-b border-outline-variant/30 overflow-x-auto no-scrollbar">
+<button class="px-lg py-md border-b-2 border-primary text-primary font-bold text-body-md whitespace-nowrap">Personal Info</button>
+<button class="px-lg py-md text-on-surface-variant font-medium text-body-md whitespace-nowrap hover:text-on-surface transition-colors">Salary Details</button>
+<button class="px-lg py-md text-on-surface-variant font-medium text-body-md whitespace-nowrap hover:text-on-surface transition-colors">Tax Documents</button>
+<button class="px-lg py-md text-on-surface-variant font-medium text-body-md whitespace-nowrap hover:text-on-surface transition-colors">Benefits</button>
+</nav>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-start">
+<!-- Left Column: Details & Payment -->
+<div class="lg:col-span-2 space-y-gutter">
+<!-- Salary Breakdown Card -->
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-headline-md font-headline-md text-on-surface">Annual Compensation</h3>
+<span class="material-symbols-outlined text-outline cursor-pointer" data-icon="info">info</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="p-md rounded-lg bg-surface-container-low border border-outline-variant/20">
+<p class="text-label-sm text-on-surface-variant mb-1">Base Salary</p>
+<p class="text-numeric-lg font-numeric-lg text-on-surface">$165,000</p>
+</div>
+<div class="p-md rounded-lg bg-surface-container-low border border-outline-variant/20">
+<p class="text-label-sm text-on-surface-variant mb-1">Bonus Target</p>
+<p class="text-numeric-lg font-numeric-lg text-on-surface">15%</p>
+</div>
+<div class="p-md rounded-lg bg-surface-container-low border border-outline-variant/20">
+<p class="text-label-sm text-on-surface-variant mb-1">Pay Frequency</p>
+<p class="text-body-lg font-bold text-on-surface pt-1">Semi-Monthly</p>
+</div>
+</div>
+</div>
+<!-- Payment Method Section -->
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-headline-md font-headline-md text-on-surface">Payment Method</h3>
+<button class="text-primary text-label-sm hover:underline">Manage Accounts</button>
+</div>
+<div class="space-y-sm">
+<div class="flex items-center p-md rounded-xl border border-outline-variant/30 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="account_balance">account_balance</span>
+</div>
+<div class="flex-grow">
+<p class="text-body-md font-bold text-on-surface">Chase Bank Premium Checking</p>
+<p class="text-label-sm text-on-surface-variant">Direct Deposit • •••• 8821</p>
+</div>
+<div class="text-right">
+<p class="text-body-md font-bold text-primary">100%</p>
+<p class="text-label-sm text-on-surface-variant">Allocation</p>
+</div>
+<span class="material-symbols-outlined text-outline ml-md group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<button class="w-full py-sm flex items-center justify-center gap-2 text-primary font-bold text-label-sm border-2 border-dashed border-outline-variant/50 rounded-xl hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+                            Add Secondary Account
+                        </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Payslips -->
+<aside class="space-y-gutter">
+<div class="bg-surface-container-lowest rounded-xl p-lg shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-headline-md font-headline-md text-on-surface">Recent Payslips</h3>
+<button class="text-primary text-label-sm hover:underline">View All</button>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<!-- Payslip Item -->
+<div class="py-md flex justify-between items-center group cursor-pointer">
+<div class="flex gap-md items-center">
+<div class="w-10 h-10 rounded bg-error-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Oct 15, 2023</p>
+<p class="text-label-sm text-on-surface-variant">Gross: $6,875.00</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-body-md font-bold text-on-surface">$4,920.12</p>
+<p class="text-label-sm text-on-surface-variant">Net Pay</p>
+</div>
+</div>
+<!-- Payslip Item -->
+<div class="py-md flex justify-between items-center group cursor-pointer">
+<div class="flex gap-md items-center">
+<div class="w-10 h-10 rounded bg-error-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Sep 30, 2023</p>
+<p class="text-label-sm text-on-surface-variant">Gross: $6,875.00</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-body-md font-bold text-on-surface">$4,920.12</p>
+<p class="text-label-sm text-on-surface-variant">Net Pay</p>
+</div>
+</div>
+<!-- Payslip Item -->
+<div class="py-md flex justify-between items-center group cursor-pointer">
+<div class="flex gap-md items-center">
+<div class="w-10 h-10 rounded bg-error-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Sep 15, 2023</p>
+<p class="text-label-sm text-on-surface-variant">Gross: $6,875.00</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-body-md font-bold text-on-surface">$4,920.12</p>
+<p class="text-label-sm text-on-surface-variant">Net Pay</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Tax Filing Status -->
+<div class="bg-surface-container-high rounded-xl p-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg opacity-20">
+<span class="material-symbols-outlined text-[64px]" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<h3 class="text-label-sm font-label-sm text-on-surface-variant uppercase mb-sm">W-4 Filing Status</h3>
+<p class="text-body-lg font-bold text-on-surface">Single or Married filing separately</p>
+<p class="text-label-sm text-on-surface-variant mt-1">Exemptions: 0 • Additional: $0</p>
+<div class="mt-lg pt-lg border-t border-outline-variant/30">
+<p class="text-label-sm text-on-surface-variant">Need to adjust withholdings?</p>
+<a class="text-primary font-bold text-body-md hover:underline inline-flex items-center gap-1 mt-1" href="#">
+                            Recalculate Tax
+                            <span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface dark:bg-surface-container-lowest shadow-lg rounded-t-xl flex justify-around items-center px-4 py-2">
+<!-- Dashboard -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-high active:scale-90 transition-all duration-200 px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</a>
+<!-- Payroll (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-label-sm font-label-sm">Payroll</span>
+</a>
+<!-- Tax -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-high active:scale-90 transition-all duration-200 px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-sm font-label-sm">Tax</span>
+</a>
+<!-- Payslips -->
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container-high active:scale-90 transition-all duration-200 px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-label-sm font-label-sm">Payslips</span>
+</a>
+</nav>
+<script>
+        // Simple tab switching logic simulation
+        document.querySelectorAll('nav button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('nav button').forEach(b => {
+                    b.classList.remove('border-b-2', 'border-primary', 'text-primary', 'font-bold');
+                    b.classList.add('text-on-surface-variant', 'font-medium');
+                });
+                button.classList.add('border-b-2', 'border-primary', 'text-primary', 'font-bold');
+                button.classList.remove('text-on-surface-variant', 'font-medium');
+            });
+        });
+    </script>
+</body></html>
