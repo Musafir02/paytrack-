@@ -49,8 +49,8 @@ classpath, so the frontend is versioned and shipped with the backend. There is
 nothing to install or build separately.
 
 **Database.** Hibernate builds and updates the schema from the JPA entities
-(`ddl-auto`), so there are no migration scripts to run. PostgreSQL is used in
-local development and production, including Render deployments.
+(`ddl-auto`), so there are no migration scripts to run. MySQL is used in
+local development and production.
 
 ### The UI
 
@@ -83,7 +83,7 @@ Authentication is HTTP session based (`JSESSIONID`), not tokens.
 ## Tech stack
 
 **Backend** — Java 17, Spring Boot 3.2.0, Spring Web, Spring Data JPA,
-Spring Security, Spring Validation, Hibernate, and the PostgreSQL driver.
+Spring Security, Spring Validation, Hibernate, and the MySQL connector.
 OpenPDF for payslip PDFs. Maven for the build.
 
 **Frontend** — HTML5, CSS3, vanilla ES6+. No framework, no bundler.
@@ -96,8 +96,7 @@ OpenPDF for payslip PDFs. Maven for the build.
 
 * JDK 17 (the project targets 17 and will not build on 11)
 * Maven 3.6+ on your `PATH`
-* PostgreSQL 14 or newer; on this Windows setup, `mvn spring-boot:run` starts
-  the local PostgreSQL server automatically
+* MySQL 8.0 or newer
 * A browser
 
 > The Maven wrapper (`mvnw`, `mvnw.cmd`) is intentionally not committed to keep
@@ -105,12 +104,10 @@ OpenPDF for payslip PDFs. Maven for the build.
 
 ### 1. Create the database
 
-Create a PostgreSQL role and database. Set the role as the database owner so
-Hibernate can create and update the tables on first run:
+Create a MySQL database:
 
 ```sql
-CREATE ROLE payroll_app WITH LOGIN PASSWORD 'your_password';
-CREATE DATABASE payroll_db OWNER payroll_app;
+CREATE DATABASE IF NOT EXISTS payroll_db;
 ```
 
 ### 2. Point the app at it
@@ -120,8 +117,8 @@ The repo reads an optional `application-local.properties` from the project root
 so your credentials stay local. Create it:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/payroll_db
-spring.datasource.username=payroll_app
+spring.datasource.url=jdbc:mysql://localhost:3306/payroll_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+spring.datasource.username=root
 spring.datasource.password=your_password
 ```
 
@@ -129,10 +126,7 @@ Commit nothing here — `.gitignore` already excludes this file.
 
 ### 3. Run it
 
-On Windows, when the PostgreSQL binaries are extracted to
-`%USERPROFILE%\Downloads\postgresql-17.11-4-windows-x64-binaries\pgsql`,
-the command below automatically starts the local PostgreSQL server if needed.
-On other setups, start PostgreSQL before running the app.
+Start your MySQL server before running the app.
 
 ```sh
 mvn spring-boot:run
@@ -178,8 +172,8 @@ second admin.
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `PORT` | `8080` | HTTP port. Render injects this; do not hardcode it |
-| `DB_URL` | local PostgreSQL | Full JDBC URL. Takes precedence over the `DB_*` parts |
-| `DB_USERNAME` | `postgres` | Database user |
+| `DB_URL` | local MySQL | Full JDBC URL. Takes precedence over the `DB_*` parts |
+| `DB_USERNAME` | `root` | Database user |
 | `DB_PASSWORD` | empty | Database password |
 | `SPRING_PROFILES_ACTIVE` | *(unset)* | Comma-separated profiles, e.g. `render,demo` |
 | `APP_DEMO_DATA_ENABLED` | `false` | Only meaningful with the `demo` profile |
@@ -188,8 +182,8 @@ second admin.
 
 | Profile | Effect |
 | --- | --- |
-| *(default)* | PostgreSQL, using `DB_URL`/`DB_USERNAME`/`DB_PASSWORD` |
-| `render` | Render PostgreSQL, small Hikari pool, `ddl-auto=update` |
+| *(default)* | MySQL, using `DB_URL`/`DB_USERNAME`/`DB_PASSWORD` |
+| `render` | Render MySQL, small Hikari pool, `ddl-auto=update` |
 | `demo` | Enables `DemoDataSeeder`, which loads synthetic data |
 
 Profiles are additive:
@@ -198,10 +192,10 @@ Profiles are additive:
 mvn spring-boot:run -Dspring-boot.run.profiles=demo
 ```
 
-Locally, create a `payroll_db` database in PostgreSQL and set `DB_PASSWORD` to
-the password for `DB_USERNAME`. For an external PostgreSQL database, set
+Locally, create a `payroll_db` database in MySQL and set `DB_PASSWORD` to
+the password for `DB_USERNAME`. For an external MySQL database, set
 `DB_URL` to a JDBC URL such as
-`jdbc:postgresql://host:5432/paytrack?sslmode=require`, along with
+`jdbc:mysql://host:3306/paytrack?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC`, along with
 `DB_USERNAME` and `DB_PASSWORD`.
 
 ---
